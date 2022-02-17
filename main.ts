@@ -1,0 +1,1 @@
+let numofletters = game.askForNumber("")
