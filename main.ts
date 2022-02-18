@@ -4,8 +4,6 @@ namespace SpriteKind {
     export const Obstacle = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    Enemy1.destroy()
-    Obstacle1.destroy()
     Obstacle1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . 4 4 4 4 . . . . . . 
@@ -33,8 +31,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     music2 = false
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Obstacle1.destroy()
-    Enemy1.destroy()
     Enemy1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . b 5 b . . . 
@@ -82,9 +78,9 @@ sprites.onOverlap(SpriteKind.Runner, SpriteKind.Chaser, function (sprite, otherS
     tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
     info.player2.changeLifeBy(-1)
 })
+let Enemy1: Sprite = null
 let music2 = false
 let Obstacle1: Sprite = null
-let Enemy1: Sprite = null
 let Runner1: Sprite = null
 let Chaser1: Sprite = null
 let list: number[] = []
