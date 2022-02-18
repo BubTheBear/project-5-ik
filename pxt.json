@@ -2,7 +2,9 @@
     "name": "project 5 ik",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "animation": "*",
+        "sprite-scaling": "*"
     },
     "files": [
         "main.blocks",

@@ -3,7 +3,7 @@ namespace SpriteKind {
     export const Runner = SpriteKind.create()
     export const Obstacle = SpriteKind.create()
 }
-controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1.destroy()
     Obstacle1.destroy()
     Obstacle1 = sprites.create(img`
@@ -24,10 +24,15 @@ controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
         . . . . . . 4 4 4 4 . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Obstacle)
+    music2 = true
+    while (false) {
+        music.playMelody("C5 B C5 B C5 B C5 B ", 120)
+    }
     pause(30000)
     Obstacle1.destroy()
+    music2 = false
 })
-controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Obstacle1.destroy()
     Enemy1.destroy()
     Enemy1 = sprites.create(img`
@@ -49,25 +54,40 @@ controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
     Enemy1.follow(Chaser1, 110)
+    music2 = true
+    while (false) {
+        music.playMelody("C5 B C5 B C5 B C5 B ", 120)
+    }
     pause(30000)
     Enemy1.destroy()
+    music2 = false
 })
 sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
     info.changeLifeBy(-1)
 })
+info.onLifeZero(function () {
+    scaling.scaleByPercent(Runner1, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+    game.over(true)
+})
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
     info.changeLifeBy(-1)
+})
+info.player2.onLifeZero(function () {
+    scaling.scaleByPercent(Chaser1, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
+    game.over(true)
 })
 sprites.onOverlap(SpriteKind.Runner, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
     info.player2.changeLifeBy(-1)
 })
+let music2 = false
 let Obstacle1: Sprite = null
 let Enemy1: Sprite = null
 let Runner1: Sprite = null
 let Chaser1: Sprite = null
+let list: number[] = []
 let numofletters = game.askForNumber("Number of letters in your name Chaser?", 2)
 if (10 <= numofletters) {
     game.splash("My, my, what a long name you have.")
@@ -85,6 +105,13 @@ let Name_of_Runner = game.askForString("What is your name Runner?", numofletters
 game.splash("Hello Runner " + Name_of_Runner + ", and Chaser " + Name + ".")
 game.splash("Runner instructions: You are to run from the slightly faster chaser and avoid getting caught, you can summon obstacles and allies to help you.")
 game.splash("Chaser instructions: You are to chase the slightly slower runner, you will also have to avoid the obstacles and allies if you want to survive.")
+let text_list = [
+"Yay, one of you is going to win.",
+"Who will lose?",
+"Who will win?",
+"Aww, one of you is going to lose."
+]
+game.splash(list[randint(0, 3)])
 tiles.setCurrentTilemap(tilemap`level1`)
 Chaser1 = sprites.create(img`
     ........................
@@ -112,10 +139,6 @@ Chaser1 = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Chaser)
-controller.moveSprite(Chaser1)
-scene.cameraFollowSprite(Chaser1)
-tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
-info.setLife(3)
 Runner1 = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -135,6 +158,10 @@ Runner1 = sprites.create(img`
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Runner)
 tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
-controller.player2.moveSprite(Runner1, 90, 90)
+controller.player2.moveSprite(Chaser1, 100, 100)
 info.player2.setLife(3)
 scene.cameraFollowSprite(Chaser1)
+controller.moveSprite(Runner1, 90, 90)
+scene.cameraFollowSprite(Chaser1)
+tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
+info.setLife(3)
