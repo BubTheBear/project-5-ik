@@ -137,3 +137,4 @@ Runner1 = sprites.create(img`
 tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
 controller.player2.moveSprite(Runner1, 90, 90)
 info.player2.setLife(3)
+scene.cameraFollowSprite(Chaser1)
