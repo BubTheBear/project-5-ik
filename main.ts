@@ -52,8 +52,13 @@ controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Press
     pause(30000)
     Enemy1.destroy()
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
-	
+sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, otherSprite) {
+    tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
+    info.changeLifeBy(-1)
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Chaser, function (sprite, otherSprite) {
+    tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
+    info.changeLifeBy(-1)
 })
 sprites.onOverlap(SpriteKind.Runner, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
