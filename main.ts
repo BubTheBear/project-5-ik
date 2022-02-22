@@ -22,8 +22,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . 4 4 4 4 . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Obstacle)
+    Obstacle1.setPosition(Runner1.x, Runner1.y)
     music2 = true
-    while (false) {
+    while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
     }
     pause(30000)
@@ -50,11 +51,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
     Enemy1.follow(Chaser1, 110)
+    Runner1.setPosition(Runner1.x, Runner1.y)
     music2 = true
-    while (false) {
+    while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
     }
-    pause(30000)
+    pause(5000)
     Enemy1.destroy()
     music2 = false
 })
