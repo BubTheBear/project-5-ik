@@ -25,6 +25,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     Obstacle1.setPosition(Runner1.x, Runner1.y)
     pause(30000)
     Obstacle1.destroy()
+    pause(5000)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1 = sprites.create(img`
@@ -49,6 +50,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1.setPosition(Runner1.x, Runner1.y)
     pause(5000)
     Enemy1.destroy()
+    pause(10000)
 })
 sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
