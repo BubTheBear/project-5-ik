@@ -85,7 +85,6 @@ let music2 = false
 let Obstacle1: Sprite = null
 let Runner1: Sprite = null
 let Chaser1: Sprite = null
-let list: number[] = []
 let numofletters = game.askForNumber("Number of letters in your name Chaser?", 2)
 if (10 <= numofletters) {
     game.splash("My, my, what a long name you have.")
@@ -109,7 +108,7 @@ let text_list = [
 "Who will win?",
 "Aww, one of you is going to lose."
 ]
-game.splash(list[randint(0, 3)])
+game.splash(text_list[randint(0, 3)])
 tiles.setCurrentTilemap(tilemap`level1`)
 Chaser1 = sprites.create(img`
     ........................
