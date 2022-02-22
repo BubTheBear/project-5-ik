@@ -24,11 +24,12 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         `, SpriteKind.Obstacle)
     Obstacle1.setPosition(Runner1.x, Runner1.y)
     music2 = true
+    Obstacle1.destroy()
+    pause(30000)
     while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
     }
-    pause(30000)
-    Obstacle1.destroy()
+    pause(1000)
     music2 = false
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -53,11 +54,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1.follow(Chaser1, 105)
     Enemy1.setPosition(Runner1.x, Runner1.y)
     music2 = true
+    pause(5000)
+    Enemy1.destroy()
     while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
     }
-    pause(5000)
-    Enemy1.destroy()
+    pause(1000)
     music2 = false
 })
 sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, otherSprite) {
@@ -66,7 +68,7 @@ sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, othe
 })
 info.onLifeZero(function () {
     scaling.scaleByPercent(Runner1, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
-    game.over(true)
+    game.over(false)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
@@ -74,7 +76,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Chaser, function (sprite, otherSp
 })
 info.player2.onLifeZero(function () {
     scaling.scaleByPercent(Chaser1, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
-    game.over(false)
+    game.over(true)
 })
 sprites.onOverlap(SpriteKind.Runner, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
@@ -159,6 +161,5 @@ controller.player2.moveSprite(Chaser1, 100, 100)
 info.player2.setLife(3)
 scene.cameraFollowSprite(Chaser1)
 controller.moveSprite(Runner1, 90, 90)
-scene.cameraFollowSprite(Chaser1)
 tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
 info.setLife(3)
