@@ -28,9 +28,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     pause(30000)
     while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
+        pause(30000)
+        music2 = false
     }
-    pause(1000)
-    music2 = false
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1 = sprites.create(img`
@@ -58,9 +58,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Enemy1.destroy()
     while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
+        pause(5000)
+        music2 = false
     }
-    pause(1000)
-    music2 = false
 })
 sprites.onOverlap(SpriteKind.Chaser, SpriteKind.Obstacle, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Chaser1, sprites.dungeon.stairNorth)
