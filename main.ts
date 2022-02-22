@@ -50,8 +50,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . c b d d d d d 5 5 5 b b . . 
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
-    Enemy1.follow(Chaser1, 110)
-    Runner1.setPosition(Runner1.x, Runner1.y)
+    Enemy1.follow(Chaser1, 105)
+    Enemy1.setPosition(Runner1.x, Runner1.y)
     music2 = true
     while (true) {
         music.playMelody("C5 B C5 B C5 B C5 B ", 120)
@@ -74,7 +74,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Chaser, function (sprite, otherSp
 })
 info.player2.onLifeZero(function () {
     scaling.scaleByPercent(Chaser1, 100, ScaleDirection.Uniformly, ScaleAnchor.Middle)
-    game.over(true)
+    game.over(false)
 })
 sprites.onOverlap(SpriteKind.Runner, SpriteKind.Chaser, function (sprite, otherSprite) {
     tiles.placeOnRandomTile(Runner1, sprites.dungeon.stairEast)
